@@ -9,15 +9,7 @@ const io = socketIo(server);
 const pubsub = new PubSub();
 const MESSAGE_ADDED = "MESSAGE_ADDED";
 
-const mockMessages = Array.from(Array(1).keys()).map((e, index) => ({
-  text: "asdas" + index,
-  id: "test" + index,
-  author: "test",
-  userId: "anonymous",
-  date: Date.now(),
-}));
-
-const messages = mockMessages;
+const messages = [];
 const resolvers = {
   Subscription: {
     addedMessage: {
@@ -100,6 +92,18 @@ const apolloServer = new ApolloServer({
 });
 
 apolloServer.applyMiddleware({ app });
+
+app.use(
+  express.static("public", {
+    maxAge: "30d",
+  })
+);
+
+app.use(
+  express.static("dist", {
+    maxAge: "30d",
+  })
+);
 
 server.listen(4000, function () {
   console.log(
