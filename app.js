@@ -94,13 +94,13 @@ const apolloServer = new ApolloServer({
 apolloServer.applyMiddleware({ app });
 
 app.use(
-  express.static("public", {
+  express.static("dist", {
     maxAge: "30d",
   })
 );
 
 app.use(
-  express.static("dist", {
+  express.static("assets", {
     maxAge: "30d",
   })
 );
