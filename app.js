@@ -105,6 +105,10 @@ app.use(
   })
 );
 
+app.all("*", function (req, res) {
+  res.sendFile("index.html", { root: __dirname + "/dist" });
+});
+
 server.listen(4000, function () {
   console.log(
     `🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`
